@@ -41,5 +41,5 @@ volumes:
   
 networks:
   default:
-    external:
-      name: localhost
+    name: localhost
+    external: true

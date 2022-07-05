@@ -14,7 +14,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: "guest"
       RABBITMQ_DEFAULT_PASS: "guest"
+
 networks:
   default:
-    external:
-      name: localhost
+    name: localhost
+    external: true

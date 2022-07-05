@@ -18,7 +18,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: redmine
+
 networks:
   default:
-    external:
-      name: localhost
+    name: localhost
+    external: true

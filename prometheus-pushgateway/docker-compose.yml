@@ -7,7 +7,8 @@ services:
     # command: 
     ports:
       - 9091:9091
+
 networks:
   default:
-    external:
-      name: localhost
+    name: localhost
+    external: true
