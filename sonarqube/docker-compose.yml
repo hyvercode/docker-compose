@@ -38,3 +38,8 @@ volumes:
   sonarqube_data:
   sonarqube_extensions:
   sonarqube_logs:
+  
+networks:
+  default:
+    external:
+      name: localhost

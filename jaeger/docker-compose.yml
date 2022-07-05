@@ -17,3 +17,7 @@ services:
       - JAEGER_AGENT_PORT=6831
     depends_on:
       - jaeger
+networks:
+  default:
+    external:
+      name: localhost
