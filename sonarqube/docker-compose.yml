@@ -1,6 +1,7 @@
 version: "3"
 services:
   sonarqube:
+    network_mode: localhost
     image: sonarqube:community
     depends_on:
       - db
