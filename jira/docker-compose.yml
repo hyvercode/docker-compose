@@ -1,0 +1,112 @@
+version: '3'
+services:
+  atlassian-bitbucket:
+    container_name: Bitbucket
+    environment:
+      - JDBC_PASSWORD={password}
+      - JDBC_URL=jdbc:mysql://localhost:3306/bitbucketdb?useUnicode=true&characterEncoding=UTF8&sessionVariables=default_storage_engine=InnoDB&autoReconnect=true&useSSL=false
+      - JDBC_USER=atlassian
+      - SERVER_PROXY_NAME=bitbucket.yourdomain.com
+      - SERVER_PROXY_PORT=443
+      - SERVER_SCHEME=https
+      - SERVER_SECURE=true
+    depends_on:
+      - mysql
+    healthcheck:
+      test: 'curl localhost:7990/status | grep -q RUNNING'
+      interval: 1m
+      start_period: 10m
+      timeout: 10s
+    image: 'atlassian/bitbucket:latest'
+    network_mode: bridge
+    ports:
+      - '7990:7990'
+      - '7999:7999'
+    restart: unless-stopped
+    volumes:
+      - /docker/bitbucket:/var/atlassian/application-data/bitbucket:rw
+      - /docker/configuration/mysql-connector-java-5.1.48-bin.jar:/var/atlassian/application-data/bitbucket/lib/mysql-connector-java-5.1.48-bin.jar:rw
+
+  atlassian-confluence:
+    container_name: Confluence
+    environment:
+      - ATL_DB_DRIVER=com.mysql.jdbc.Driver
+      - ATL_DB_TYPE=mysql
+      - ATL_JDBC_PASSWORD={password}
+      - ATL_JDBC_URL=jdbc:mysql://localhost:3306/confluencedb?useUnicode=true&autoReconnect=true&useSSL=false
+      - ATL_JDBC_USER=atlassian
+      - ATL_PROXY_NAME=confluence.yourdomain.com
+      - ATL_PROXY_PORT=443
+      - ATL_TOMCAT_PORT=8090
+      - ATL_TOMCAT_SCHEME=https
+      - ATL_TOMCAT_SECURE=true
+    depends_on:
+      - mysql
+    healthcheck:
+      test: 'curl localhost:8090/status | grep -q RUNNING'
+      interval: 1m
+      start_period: 10m
+      timeout: 10s
+    image: 'atlassian/confluence:latest'
+    network_mode: bridge
+    ports:
+      - '8090:8090'
+      - '8091:8091'
+    restart: unless-stopped
+    volumes:
+      - /docker/confluence:/var/atlassian/application-data/confluence:rw
+      - /docker/configuration/mysql-connector-java-8.0.21.jar:/opt/atlassian/confluence/confluence/WEB-INF/lib/mysql-connector-java-8.0.21.jar:rw
+      - /docker/confluence/logs:/opt/atlassian/confluence/logs:rw
+
+  atlassian-jira:
+    container_name: Jira
+    environment:
+      - ATL_DB_DRIVER=com.mysql.jdbc.Driver
+      - ATL_DB_TYPE=mysql
+      - ATL_JDBC_PASSWORD={password}
+      - ATL_JDBC_URL=jdbc:mysql://localhost:3306/jiradb?useUnicode=true&autoReconnect=true&useSSL=false
+      - ATL_JDBC_USER=atlassian
+      - ATL_PROXY_NAME=jira.yourdomain.com
+      - ATL_PROXY_PORT=443
+      - ATL_TOMCAT_PORT=8080
+      - ATL_TOMCAT_SCHEME=https
+      - ATL_TOMCAT_SECURE=true
+    depends_on:
+      - mysql
+    healthcheck:
+      test: 'curl localhost:8080/status | grep -q RUNNING'
+      interval: 1m
+      start_period: 10m
+      timeout: 10s
+    image: 'atlassian/jira-software:latest'
+    network_mode: bridge
+    ports:
+      - '8080:8080'
+    restart: unless-stopped
+    volumes:
+      - /docker/jira:/var/atlassian/application-data/jira:rw
+      - /docker/configuration/mysql-connector-java-8.0.21.jar:/opt/atlassian/jira/lib/mysql-connector-java-8.0.21.jar:rw
+      - /docker/jira/log:/opt/atlassian/jira/logs:rw
+
+  mysql:
+    container_name: MySQL
+    environment: 
+      - MYSQL_ROOT_PASSWORD={password}
+    healthcheck:
+      test: '/usr/bin/mysql --user=healthcheck --password=healthcheck --execute "SHOW DATABASES;"'
+      interval: 1m
+      start_period: 1m
+      timeout: 10s
+    image: 'mysql:latest'
+    network_mode: bridge
+    ports:
+      - '3306:3306'
+    restart: unless-stopped
+    volumes:
+      - /docker/mysql:/var/lib/mysql:rw
+      - /docker/configuration/conf.d/mysql.cnf:/etc/mysql/conf.d/my.cnf:rw
+
+networks:
+  default:
+    external:
+      name: bridge
