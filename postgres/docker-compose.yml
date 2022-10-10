@@ -1,19 +1,25 @@
-version: '3.5'
+version: '3'
 
 services:
-  postgres:
-    container_name: postgres
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
-      PGDATA: /data/postgres
-    volumes:
-       - postgres:/data/postgres
+  redis-master:
+    image: 'bitnami/redis:latest'
     ports:
-      - "5432:5432"
-    restart: unless-stopped
+      - "6379:6379"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - REDIS_PASSWORD=devops@solusione
+    volumes:
+      - '/path/to/redis-persistence:/bitnami'
 
-volumes:
-    postgres:
-    pgadmin:
+  redis-replica:
+    image: 'bitnami/redis:latest'
+    ports:
+      - "6379:6379"
+    depends_on:
+      - redis-master
+    environment:
+      - REDIS_REPLICATION_MODE=slave
+      - REDIS_MASTER_HOST=redis-master
+      - REDIS_MASTER_PORT_NUMBER=6379
+      - REDIS_MASTER_PASSWORD=devops@solusione
+      - REDIS_PASSWORD=devops@solusione

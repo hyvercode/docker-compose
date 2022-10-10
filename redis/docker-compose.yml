@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  redis-tms:
+    image: "redis"
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - REDIS_PASSWORD=tms
+    volumes:
+      - '/path/to/redis-persistence:/tms'
