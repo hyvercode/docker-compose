@@ -1,8 +1,9 @@
 version: "3"
 services:
   sonarqube:
-    network_mode: localhost
     image: sonarqube:community
+    hostname: sonarqube
+    container_name: sonarqube
     depends_on:
       - db
     environment:
@@ -17,12 +18,15 @@ services:
       - "9000:9000"
   db:
     image: postgres:12
+    hostname: postgresql
+    container_name: postgresql
     environment:
       POSTGRES_USER: sonar
       POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
     volumes:
-      - ./postgresql:/var/lib/postgresql
-      - ./postgresql_data:/var/lib/postgresql/data
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
 
 volumes:
   sonarqube_data:
