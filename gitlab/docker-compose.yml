@@ -1,0 +1,32 @@
+version: '3.6'
+services:
+  web:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: 'solusione.id'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+     
+        gitlab_rails['gitlab_shell_ssh_port'] = 10022 
+
+        gitlab_rails['smtp_enable'] = true
+        gitlab_rails['smtp_address'] = "smtp.office365.com"
+        gitlab_rails['smtp_port'] = 587
+        gitlab_rails['smtp_user_name'] = "noreply@solusione.id"
+        gitlab_rails['smtp_password'] = "Solusione@22"
+        gitlab_rails['smtp_domain'] = "smtp.office365.com"
+        gitlab_rails['smtp_authentication'] = "login"
+        gitlab_rails['smtp_enable_starttls_auto'] = true
+        gitlab_rails['smtp_openssl_verify_mode'] = 'peer'
+
+        gitlab_rails['initial_root_password'] = 'devops@solusione'
+
+    ports:
+      - '49164:80'
+      - '49163:443'
+      - '49165:22'
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+    shm_size: '256m'

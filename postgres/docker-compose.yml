@@ -1,25 +1,41 @@
-version: '3'
-
+version: '3.5'
 services:
-  redis-master:
-    image: 'bitnami/redis:latest'
-    ports:
-      - "6379:6379"
+  postgresdb:
+    container_name: postgres_solusione
+    image: postgres
     environment:
-      - REDIS_REPLICATION_MODE=master
-      - REDIS_PASSWORD=devops@solusione
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: devops@solusione
+      PGDATA: /data/postgres
     volumes:
-      - '/path/to/redis-persistence:/bitnami'
-
-  redis-replica:
-    image: 'bitnami/redis:latest'
+       - ../../databases/postgresdb:/data/postgres
     ports:
-      - "6379:6379"
-    depends_on:
-      - redis-master
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:4
     environment:
-      - REDIS_REPLICATION_MODE=slave
-      - REDIS_MASTER_HOST=redis-master
-      - REDIS_MASTER_PORT_NUMBER=6379
-      - REDIS_MASTER_PASSWORD=devops@solusione
-      - REDIS_PASSWORD=devops@solusione
+      PGADMIN_DEFAULT_EMAIL: admin@solusione.id
+      PGADMIN_DEFAULT_PASSWORD: devops@solusione
+      PGADMIN_LISTEN_ADDRESS: 0.0.0.0
+      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
+    volumes:
+        - pgadmin_volume:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+    depends_on:
+      - postgresdb
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+    pgadmin_volume:
