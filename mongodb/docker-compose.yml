@@ -1,0 +1,19 @@
+version: '3.6'
+
+services:
+   mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    volumes:
+      - ~/mongo:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=devops@solusione
+      - MONGO_INITDB_DATABASE=admin
+
+networks:
+  default:
+    name: tms_microservice
+    external: true
