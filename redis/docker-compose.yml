@@ -1,12 +1,18 @@
-version: '3.9'
+version: '3'
 
 services:
-  redis-tms:
-    image: "redis"
+  redis:
+    image: 'redis:latest'
+    container_name: redis
     ports:
-      - "6379:6379"
+      - "16379:6379"
     environment:
       - REDIS_REPLICATION_MODE=master
-      - REDIS_PASSWORD=tms
+      #- REDIS_PASSWORD=devops@solusione
     volumes:
-      - '/path/to/redis-persistence:/tms'
+      - '/path/to/redis-persistence:/bitnami'
+      
+networks:
+  default:
+    name: tms_microservice
+    external: true
