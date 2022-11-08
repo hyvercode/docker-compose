@@ -1,16 +1,23 @@
 version: '3.9'
 
 services:
+
   rabbitmq:
     image: rabbitmq:3.7-management
+    container_name: rabbitmq
     healthcheck:
       test: [ "CMD-SHELL", "rabbitmqctl status" ]
       interval: 10s
       timeout: 10s
       retries: 3
     ports:
-      - "15672:15672"
+      - "15673:15672"
       - "5672:5672"
     environment:
       RABBITMQ_DEFAULT_USER: "guest"
       RABBITMQ_DEFAULT_PASS: "guest"
+      
+networks:
+  default:
+    name: tms_microservice
+    external: true
