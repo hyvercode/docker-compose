@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  mssql:
+    container_name: mssql
+    image: 'mcr.microsoft.com/mssql/server:2019-CU18-ubuntu-20.04'
+    ports:
+      - '1444:1433'
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=devops@solusione
+
+
+networks:
+  default:
+    name: tms_microservice
+    external: true
