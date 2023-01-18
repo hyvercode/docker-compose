@@ -11,7 +11,7 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=devops@solusione
-      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_DATABASE=camunda-client
 
 networks:
   default:
