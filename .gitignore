@@ -2,3 +2,9 @@ sonarqube/postgre/**
 sonarqube/sonarqube/**
 
 **/.idea/**
+
+wordpress/data
+wordpress/plugins
+wordpress/wordpress
+
+mssql/drive

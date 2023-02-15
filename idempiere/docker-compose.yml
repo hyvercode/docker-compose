@@ -2,14 +2,14 @@ version: '3.7'
 services:
   idempiere:
     container_name: idempiere
-    image: idempiereofficial/idempiere:10
+    image: idempiereofficial/idempiere:9
     volumes:
       - idempiere_config:/opt/idempiere/configuration
       - idempiere_plugins:/opt/idempiere/plugins
     environment:
       - TZ=Asia/Jakarta
     ports:
-      - 8080:8080
+      - 8090:8080
       - 8443:8443
       - 12612:12612
 
@@ -22,7 +22,7 @@ services:
       - TZ=Asia/Jakarta
       - POSTGRES_PASSWORD=postgres
     ports:
-      - 5432:5432
+      - 5490:5432
 
 volumes:
   idempiere_data:
