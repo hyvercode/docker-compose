@@ -1,0 +1,26 @@
+version: '3'
+services:
+  odoo:
+    image: odoo:16.0
+    environment:
+      HOST: postgres
+      USER: postgres
+      PASSWORD: devops@solusione
+    depends_on:
+      - postgres
+    ports:
+      - "8069:8069"
+    volumes:
+      - data:/var/lib/odoo
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB : postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: devops@solusione
+      PGDATA: /data/postgres
+    volumes:
+      - db:/var/lib/postgresql/data/pgdata
+volumes:
+  data:
+  db:
