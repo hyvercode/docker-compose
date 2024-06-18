@@ -19,7 +19,7 @@ services:
         gitlab_rails['smtp_enable_starttls_auto'] = true
         gitlab_rails['smtp_openssl_verify_mode'] = 'peer'
 
-        gitlab_rails['initial_root_password'] = 'devops@solusione'
+        gitlab_rails['initial_root_password'] = 'devops@'
 
     ports:
       - '49164:80'

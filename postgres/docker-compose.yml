@@ -5,7 +5,7 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: devops@solusione
+      POSTGRES_PASSWORD: devops@
       PGDATA: /data/postgres
     volumes:
        - ../../databases/postgresdb:/data/postgres
@@ -20,7 +20,7 @@ services:
     image: dpage/pgadmin4:4
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@solusione.id
-      PGADMIN_DEFAULT_PASSWORD: devops@solusione
+      PGADMIN_DEFAULT_PASSWORD: devops@
       PGADMIN_LISTEN_ADDRESS: 0.0.0.0
       PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
     volumes:

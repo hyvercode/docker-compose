@@ -5,7 +5,7 @@ services:
     environment:
       HOST: postgres
       USER: postgres
-      PASSWORD: devops@solusione
+      PASSWORD: devops@
     depends_on:
       - postgres
     ports:
@@ -17,7 +17,7 @@ services:
     environment:
       POSTGRES_DB : postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: devops@solusione
+      POSTGRES_PASSWORD: devops@
       PGDATA: /data/postgres
     volumes:
       - db:/var/lib/postgresql/data/pgdata

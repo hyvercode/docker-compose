@@ -22,7 +22,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - JASPERREPORTS_USERNAME=admin
-      - JASPERREPORTS_PASSWORD=devops@solusione
+      - JASPERREPORTS_PASSWORD=devops@
       - JASPERREPORTS_EMAIL=admin@solusione.id
       - JASPERREPORTS_DATABASE_HOST=mariadb
       - JASPERREPORTS_DATABASE_PORT_NUMBER=3306
