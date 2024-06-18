@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  master:
+    image: locustio/locust
+    ports:
+     - "6089:8089"
+    volumes:
+      - ./:/mnt/locust
+    command: -f /mnt/locust/locustfile.py

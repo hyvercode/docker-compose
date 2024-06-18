@@ -1,0 +1,7 @@
+services:
+  soketi:
+    container_name: soketio
+    ports:
+      - 6001:6001
+      - 9601:9601
+    image: quay.io/soketi/soketi:1.4-16-debian
