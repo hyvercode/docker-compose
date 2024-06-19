@@ -8,7 +8,7 @@ services:
       - '1444:1433'
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=devops@
+      - SA_PASSWORD=devops@123!
 
 
 networks:
