@@ -14,5 +14,4 @@ services:
       
 networks:
   default:
-    name: tms_microservice
-    external: true
+    driver: bridge

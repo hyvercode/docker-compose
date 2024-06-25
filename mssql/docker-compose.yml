@@ -10,8 +10,6 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=devops@123!
 
-
 networks:
   default:
-    name: tms_microservice
-    external: true
+    driver: bridge
