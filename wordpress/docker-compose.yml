@@ -8,7 +8,7 @@ services:
     volumes:
       - './data/mysql:/var/lib/mysql'
     ports:
-      - 13306:3306
+      - 3333:3306
     environment:
       MYSQL_ROOT_PASSWORD: somewordpress
       MYSQL_DATABASE: wordpress_db
@@ -20,7 +20,7 @@ services:
       - db
     image: 'wordpress:latest'
     ports:
-      - '8010:80'
+      - '8333:80'
     environment:
       WORDPRESS_DB_HOST: 'db:3306'
       WORDPRESS_DB_USER: wordpress_user
@@ -29,3 +29,7 @@ services:
     volumes:
       - "./wordpress:/var/www/html"
       - "./plugins:/var/www/html/wp-content/plugins"
+
+networks:
+  default:
+    driver: bridge
