@@ -5,10 +5,10 @@ services:
     container_name: mssql
     image: 'mcr.microsoft.com/mssql/server:2019-CU18-ubuntu-20.04'
     ports:
-      - '1444:1433'
+      - '1433:1433'
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=devops@123!
+      - SA_PASSWORD=Dev@SO123!
 
 networks:
   default:
