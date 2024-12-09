@@ -29,3 +29,8 @@ services:
     volumes:
       - "./wordpress:/var/www/html"
       - "./plugins:/var/www/html/wp-content/plugins"
+
+networks:
+  default:
+    name: localhost
+    external: true
