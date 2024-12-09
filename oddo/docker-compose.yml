@@ -1,7 +1,7 @@
 version: '3'
 services:
   odoo:
-    image: odoo:16.0
+    image: odoo
     environment:
       HOST: postgres
       USER: postgres
@@ -24,3 +24,8 @@ services:
 volumes:
   data:
   db:
+
+networks:
+  default:
+    name: localhost
+    external: true

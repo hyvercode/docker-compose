@@ -9,3 +9,8 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
+
+networks:
+  default:
+    name: localhost
+    external: true

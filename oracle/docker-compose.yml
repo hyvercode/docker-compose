@@ -5,7 +5,7 @@ services:
     environment:
       - ORACLE_SID=ORCLCDB
       - ORACLE_PDB=ORCLPDB1
-      - ORACLE_PWD=Oracle_123
+      - ORACLE_PWD=Oracle@123
     ports:
       - 1521:1521
     volumes:
@@ -20,3 +20,8 @@ services:
 volumes:
   oracle-data:
   oracle-backup:
+
+networks:
+  default:
+    name: localhost
+    external: true

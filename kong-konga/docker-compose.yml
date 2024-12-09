@@ -68,4 +68,5 @@ volumes:
 
 networks:
   default:
-    driver: bridge
+    name: localhost
+    external: true
