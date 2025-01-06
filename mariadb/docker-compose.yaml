@@ -2,17 +2,19 @@ version: '3.9'
 
 services:
   mariadb:
-    image: mariadb:10.7
+    image: mariadb
+    container_name: mariadb
     ports:
-      - 3306:3306
+      - 3336:3306
     volumes:
       - ~/apps/mariadb:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=Root@123!
+      - MYSQL_PASSWORD=Root@123!
       - MYSQL_USER=root
-      - MYSQL_DATABASE=example
+      - MYSQL_DATABASE=root
 
 networks:
   default:
-    driver: bridge
+    name: localhost
+    external: true
