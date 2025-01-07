@@ -5,9 +5,9 @@ services:
     container_name: oddo
     environment:
       HOST: postgres
-      USER: postgres
+      USER: oddo
       DATABSE: oddo
-      PASSWORD: root
+      PASSWORD: oddo
     ports:
       - "8069:8069"
 
