@@ -9,7 +9,7 @@ services:
     image: prom/prometheus
     restart: always
     volumes:
-      - ./prometheus:/etc/prometheus/
+      - /etc/prometheus/
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -47,7 +47,7 @@ services:
     ports:
       - 9093:9093
     volumes:
-      - ./alertmanager/:/etc/alertmanager/
+      - /etc/alertmanager/
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
@@ -73,7 +73,7 @@ services:
       GF_INSTALL_PLUGINS: 'grafana-clock-panel,grafana-simple-json-datasource'
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - /etc/grafana/provisioning/
     env_file:
       - ./grafana/config.monitoring
     ports:

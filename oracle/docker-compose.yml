@@ -4,8 +4,8 @@ services:
     image: gvenzl/oracle-xe
     environment:
       - ORACLE_SID=ORCLCDB
-      - ORACLE_PDB=ORCLPDB1
-      - ORACLE_PWD=Oracle@123
+      - ORACLE_PDB=ORCLPDB
+      - ORACLE_PWD=Oracle@123!
     ports:
       - 1521:1521
     volumes:
