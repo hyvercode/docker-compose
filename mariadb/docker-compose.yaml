@@ -5,15 +5,12 @@ services:
     image: mariadb
     container_name: mariadb
     ports:
-      - 3336:3306
+      - 3306:3306
     volumes:
       - ~/apps/mariadb:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=Root@123!
-      - MYSQL_PASSWORD=Root@123!
+      - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=root
-      - MYSQL_DATABASE=root
-
 networks:
   default:
     name: localhost

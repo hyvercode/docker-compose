@@ -6,7 +6,7 @@ services:
     container_name: postgres
     command: -c 'max_connections=500'
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
