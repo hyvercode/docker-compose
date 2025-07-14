@@ -1,0 +1,21 @@
+version: '3.9'
+
+name: mac-os-sequoia-15
+services:
+    docker-osx:
+        stdin_open: true
+        tty: true
+        devices:
+            - /dev/kvm
+        ports:
+            - 50922:10022
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+        environment:
+            - DISPLAY=${DISPLAY:-:0.0}
+            - GENERATE_UNIQUE=true
+            - CPU=Haswell-noTSX
+            - CPUID_FLAGS=kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on
+            - MASTER_PLIST_URL=https://raw.githubusercontent.com/sickcodes/osx-serial-generator/master/config-custom-sonoma.plist
+            - SHORTNAME=sequoia
+        image: sickcodes/docker-osx:latest
