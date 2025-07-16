@@ -2,7 +2,8 @@ version: "3"
 
 services:
   n8n:
-    image: n8nio/n8n
+    image: n8nio/n8n:latest
+    container_name: n8n
     restart: always
     ports:
       - "5678:5678"
@@ -21,7 +22,7 @@ services:
       - N8N_LOG_LEVEL=${N8N_LOG_LEVEL}
       - N8N_DIAGNOSTICS_ENABLED=${N8N_DIAGNOSTICS_ENABLED}
     volumes:
-      - ./data/n8n:/home/node/.n8n
+      - /home/node/.n8n
 
 networks:
   default:
