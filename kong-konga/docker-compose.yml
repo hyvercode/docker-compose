@@ -18,8 +18,8 @@ services:
     image: kong
     environment:
       - KONG_DATABASE=postgres
-      - KONG_PG_HOST=kong-database
-      - KONG_PG_PASSWORD=kong
+      - KONG_PG_HOST=postgres
+      - KONG_PG_PASSWORD=root
       - KONG_CASSANDRA_CONTACT_POINTS=kong-database
     command: kong migrations bootstrap
     restart: on-failure
