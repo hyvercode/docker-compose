@@ -1,34 +1,26 @@
-    version: '3.8'
-    
-    cd services:
-      ollama:
-        image: ollama/ollama
-        container_name: ollama
-        ports:
-          - "11434:11434" # Default Ollama port
-        volumes:
-          - ollama_models:/root/.ollama # Persistent storage for models
-        # Optional: For GPU support (if available and configured)
-        # deploy:
-        #   resources:
-        #     reservations:
-        #       devices:
-        #         - driver: nvidia
-        #           count: 1
-        #           capabilities: [gpu]
-      open-webui:
-        image: ghcr.io/open-webui/open-webui:main
-        container_name: open-webui
-        ports:
-          - "3000:8080" # Access Open-WebUI on port 3000
-        environment:
-          - OLLAMA_API_BASE_URL=http://ollama:11434/api # Connects to the Ollama service
-          - WEBUI_SECRET_KEY=your_secret_key_here # **Important: Change this to a strong, unique key**
-        volumes:
-          - openwebui_data:/app/backend/data # Persistent storage for Open-WebUI data
-        depends_on:
-          - ollama # Ensures Ollama starts before Open-WebUI
-
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
     volumes:
-      ollama_models:
-      openwebui_data:
+      - ollama_data:/root/.ollama
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - "3030:8080"
+    environment:
+      - 'OLLAMA_BASE_URL=http://ollama:11434'
+    volumes:
+      - open-webui_data:/app/backend/data
+    depends_on:
+      - ollama
+
+volumes:
+  ollama_data:
+  open-webui_data:
